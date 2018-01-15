@@ -1,0 +1,36 @@
+.first {
+	font-size: 1.3em;
+	display: inline-block;
+	width: 9em
+}
+
+.last {
+	font-size: 1.3em;
+	font-style: oblique;
+}
+li {
+	display: list-item;	
+/* 	border: 1px solid */
+}
+
+select {
+	width: 100%
+}
+
+#inNewScore{	
+	width: 20em
+}
+
+img {
+	margin: 2%;	
+	pading-left: 4em;	
+}
+
+.img-round {
+	
+	border-radius: 10%
+}
+
+
+
+/* vlastnosti písma, odsekov, tabuliek, okrajov. */

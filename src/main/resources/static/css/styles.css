@@ -1,0 +1,27 @@
+.mines_field {
+	border-collapse: collapse;
+	border: none
+}
+
+.mines_field td {
+	padding: 0;
+}
+
+.puzzle_tile {
+	border-collapse: collapse;
+	table-layout: fixed;
+	text-align: center;
+	border: 3px solid darkblue;
+	font-size: 3em;
+	width: 1em;
+}
+
+.puzzle_tile a:link {
+	color: darkblue;
+	text-decoration: none;
+}
+
+.puzzle_tile a:visited {
+	color: darkblue;
+	text-decoration: none;
+}

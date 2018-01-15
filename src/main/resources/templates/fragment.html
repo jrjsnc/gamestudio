@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<body>
+
+	<div th:fragment="links">
+		<span />
+		<script src="js/gamestudio2.js"></script>
+		<link rel="stylesheet" href="css/styles.css" />
+		<link rel="stylesheet" href="css/style2.css" />
+		<link rel="stylesheet"
+			href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" />
+
+
+
+	</div>
+
+
+	<div th:fragment="footer">
+
+		<footer id="main-footer" class="grid">
+		
+		<div><a href="/">Gamestudio web</a></div>
+            <div>Project by Juraj</div>
+            
+
+			
+<!-- 				<a href="/" class="btn">index</a> -->
+			
+
+			
+				<div th:if='${@userController.logged}'> Logged as <span
+					th:text='${@userController.loggedPlayer?.login}' /> <a
+					href="/logout">Logout</a>
+				</div>
+			
+
+			
+				<div th:if='${not @userController.logged}'> <a href="/login"
+					>Log in</a>
+				</div>
+			
+			
+			</footer>
+	</div>
+
+	
+
+
+
+
+</body>
+</html>

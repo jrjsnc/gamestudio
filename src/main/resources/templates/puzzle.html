@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Puzzle</title>
+<meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+<div th:replace="fragment::links" />
+</head>
+
+
+
+<body>
+	<p th:utext='${controller.render()}' />
+	<p th:utext='${controller.message}' />
+
+	<p>	
+		Average rating of this game: 
+		<span th:utext='${#numbers.formatDecimal(avgRating,1,2)}' />
+	</p>
+
+	<p th:if='${@userController.logged}'>
+		Your rating: <span th:text='${userRating}' />
+		
+	
+
+<br/>
+
+<div class="rating">
+	<a href="/updateRating_puzzle?value=1" value="1"><i class="fa fa-star fa-md"></i></a>
+	<a href="/updateRating_puzzle?value=2" value="2"><i class="fa fa-star fa-md"></i></a>
+	<a href="/updateRating_puzzle?value=3" value="3"><i class="fa fa-star fa-md"></i></a>
+	<a href="/updateRating_puzzle?value=4" value="4"><i class="fa fa-star fa-md"></i></a>
+	<a href="/updateRating_puzzle?value=5" value="5"><i class="fa fa-star fa-md"></i></a>
+</div>
+			<form  method="post" name="addComment" onsubmit="validateCommentForm()" action="/addComment_puzzle">
+				New Comment: <input type="text" name="newComment" /> <input
+					type="submit" value="Add Comment" />
+			</form> 
+			
+			
+			
+			<h3>Is favourite</h3>
+			
+			<span th:if='${isFavourite}==true'> <a href='/setFavourite_puzzle'>remove from favourites</a> </span>
+			<span th:if='${isFavourite}==false'> <a href='/setFavourite_puzzle'>add to favourites</a> </span>
+	</p>
+
+	<a href='/puzzle'>New game</a>
+	
+	<h3>Top 10 scores:</h3>
+	<ol>
+		<li th:each='score : ${scores}'><span th:text='${score.username}'/><span> </span>
+			<span th:text='${score.value}' /></li>
+	</ol>
+
+	<h3>Comments:</h3>
+	<ol>
+		<li th:each='comment : ${comments}'><span
+			th:text='${comment.createdOn}' /><span> </span> <span
+			th:text='${comment.username}' /><span> </span><span th:text='${comment.content}' /></li>
+	</ol>
+
+	<div th:replace="fragment::footer" />	
+	
+<!-- 	<script src="js/gamestudio2.js"></script> -->
+
+</body>
+</html>

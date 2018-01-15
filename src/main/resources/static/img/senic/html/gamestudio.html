@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>gamestudio</title>
+<link rel="stylesheet" href="css/normalize.css" />
+<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/gamestudio.css" />
+</head>
+
+<!-- prvky: odstavec, nadpis, zoznam, tabuľka, -->
+<!-- obrázok, odkazy (interné – „menu“, externé). -->
+<!-- Na stránke budú číslované zoznamy obsahujúce skóre z hier. -->
+
+<body>
+
+	<main>
+
+
+	<div class="jumbotron text-center" id="top">
+		<h1>Gamestudio</h1>
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+
+				<select class="selectpicker" data-width="100%" name="selectGame"
+					id="selectGame" onchange="valueFromSelect()">
+					<option value="1">4pics1word</option>
+					<option value="2" selected="selected">Pacman</option>
+					<option value="3">Mines</option>
+				</select>
+			</div>
+		</div>
+
+		<div class="row">
+
+			<div class="col-6">
+				<div class="row">
+					<a href="https://sk.wikipedia.org/wiki/Pac-Man" target="_blank">
+						<img src="/img/pacman.png" alt="pacman"
+						class="img-round img-responsive">
+					</a>
+				</div>
+				<div class="row">
+					<a href="https://en.wikipedia.org/wiki/Minesweeper_(video_game)"
+						target="_blank"> <img src="/img/mines.png" alt="mines"
+						class="img-round img-responsive">
+					</a>
+				</div>
+				<div class="row">
+					<a href="https://en.wikipedia.org/wiki/4_Pics_1_Word"
+						target="_blank"> <img src="/img/4pics1word.png"
+						alt="4pics1word" class="img-round img-responsive">
+					</a>
+				</div>
+			</div>
+
+			<div class="col-6">
+				<div class="row">
+
+					<h2>List of scores</h2>
+					<p></p>
+
+					<div id="scoreTable"></div>
+				</div>
+				<hr align="left" width="100%">
+				<div class="row">
+
+					<form id="frmNewScore">
+
+						<label>Your new score: <input type="text" id="inNewScore"
+							placeholder="Enter score as number" />
+
+
+
+						</label> <label>Username: <input type="text" id="inUsername"
+							placeholder="Enter your name" /></label>
+						<button type="button" id="btSaveScore">Save score</button>
+
+					</form>
+
+				</div>
+
+				<div class="row">
+					<a href="#top">Back to top</a>
+
+					<table style="width: 100%" border="1px">
+						<tr>
+							<th>Nazov hry</th>
+							<th><a href=></a></th>
+						</tr>
+						<tr>
+							<td>Pacman</td>
+							<td>Smith</td>
+
+						</tr>
+						<tr>
+							<td>Mines</td>
+							<td>Jackson</td>
+
+						</tr>
+						<tr>
+							<td>4pics 1word</td>
+							<td>Jackson</td>
+
+						</tr>
+					</table>
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	</main>
+
+	<!-- Mustache sablona pre list -->
+	<script id="tmplScores" type="text/template">     
+<ol>
+{{#.}}  
+    <li>
+		<span class="first">{{username}}</span> <span class="last">{{value}}</span>
+	</li>
+{{/.}}
+</ol>
+</script>
+
+	<!-- Vlozenie jQuery -->
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+		integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+		crossorigin="anonymous">
+		
+	</script>
+	<!--Linka na CDN je z https://code.jquery.com/-->
+	<script>
+		window.jQuery
+				|| document.write('<script src="js/jquery.min.js"><\/script>')
+	</script>
+
+	<!-- Vlozenie Mustache -->
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
+	<script>
+		window.Mustache
+				|| document
+						.write('<script src="js/mustache.min.js"><\/script>')
+	</script>
+
+	<!-- Vlozenie skriptu pre tuto stranku  -->
+	<!-- <script src="js/ajaxDemo.js"></script> -->
+	<script src="js/gamestudio.js"></script>
+
+
+
+</body>
+</html>
