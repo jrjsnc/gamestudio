@@ -73,8 +73,8 @@ public class Field {
 	}
 
 	public boolean isSolved() {
-		for (int row = 0; row < tiles.length; row++) {
-			for (int column = 0; column < tiles.length; column++) {
+		for (int row = 0; row < rowCount; row++) {
+			for (int column = 0; column < columnCount; column++) {
 				if (tiles[row][column].getState() != TileState.PAIRED)
 					return false;
 			}
@@ -84,8 +84,8 @@ public class Field {
 
 	public void controlMatch() {
 		int counter = 0;
-		for (int row = 0; row < tiles.length; row++) {
-			for (int column = 0; column < tiles.length; column++) {
+		for (int row = 0; row < rowCount; row++) {
+			for (int column = 0; column < columnCount; column++) {
 				if (tiles[row][column].getState() == TileState.OPENED) {
 					openedTiles[counter][0] = row;
 					openedTiles[counter][1] = column;

@@ -1,11 +1,20 @@
 .mines_field {
-	border-collapse: collapse;
-	border: none
+	border-collapse: collapse;	
 }
 
 .mines_field td {
 	padding: 0;
 }
+
+.pexeso_field img{ 
+	padding: 0;
+	width: 3em;
+	height: 3em;
+		
+}
+
+
+
 
 .puzzle_tile {
 	border-collapse: collapse;
