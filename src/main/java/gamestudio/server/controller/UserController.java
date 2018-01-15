@@ -68,14 +68,14 @@ public class UserController {
 			return "index";
 		}		
 		model.addAttribute("message", "Name already used. Try another name.");
-		return "login";
+		return "login"; 
 		//return isLogged() ? "index" : "login";
 	}
 
 	@RequestMapping("/logout")
 	public String login(Model model) {
 		loggedPlayer = null;
-		return "login";
+		return "index";
 	}
 
 	public Player getLoggedPlayer() {
