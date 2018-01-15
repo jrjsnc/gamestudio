@@ -1,4 +1,4 @@
-#Gamestudio projekt z java academy.
+# Gamestudio projekt z java academy.
 
 Mozes sa hrat toto:
 * minesweeper
