@@ -53,7 +53,7 @@ public abstract class GeneralController {
 		if (userController.isLogged()) {
 			model.addAttribute("userRating",
 					ratingService.getUserRating(getGameName(), userController.getLoggedPlayer().getLogin()));
-			model.addAttribute("isFavourite",
+			model.addAttribute("favourite",
 					favouriteService.isFavourite(userController.getLoggedPlayer().getLogin(), getGameName()));
 			model.addAttribute("userFavourites",
 					favouriteService.getFavourites(userController.getLoggedPlayer().getLogin()));

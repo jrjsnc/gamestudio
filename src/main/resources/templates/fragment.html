@@ -51,11 +51,11 @@ Comment: <input type="text" name="content"/>
 
 <div th:fragment="favourite">
 <span th:if='${@userController.logged}'>
-<form action="/addComment" method="post">
 
-</form>
 <a th:href='${"/setFavourite?game=" + game}'>
-<span th:if='${isFavourite}==false'>Add to favourites</span></a>
+<span th:if='${favourite}'>Remove from favourites</span>
+<span th:if='${not favourite}'>Add to favourites</span>
+</a>
 </span>
 </div>
 <!-- <div th:fragment="favourite"> -->
