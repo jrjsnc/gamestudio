@@ -23,7 +23,7 @@ import gamestudio.service.ScoreService;
 //@RequestMapping("/game")
 //@Controller
 //@Scope(WebApplicationContext.SCOPE_SESSION)
-public class GeneralController {
+public abstract class GeneralController {
 
 	@Autowired
 	protected ScoreService scoreService;
@@ -40,51 +40,38 @@ public class GeneralController {
 	@Autowired
 	protected UserController userController;
 
-	private String game;
-
 	protected Model gameModel;
-
-	public void setGame(String game) {
-		this.game = game;
-		// System.err.println(this.game);
-	}
-
-	public String getGame() {
-		return game;
-	}
+	
+	protected String message;	
 
 	protected void fillModel(Model model) {
 		model.addAttribute("controller", this);
-		model.addAttribute("scores", scoreService.getTopScores(game));
-		model.addAttribute("avgRating", ratingService.getAverageRating(game));
-		model.addAttribute("comments", commentService.getComments(game));
+		model.addAttribute("scores", scoreService.getTopScores(getGameName()));
+		model.addAttribute("avgRating", ratingService.getAverageRating(getGameName()));
+		model.addAttribute("comments", commentService.getComments(getGameName()));
+		model.addAttribute("game", getGameName());
 		if (userController.isLogged()) {
 			model.addAttribute("userRating",
-					ratingService.getUserRating(game, userController.getLoggedPlayer().getLogin()));
+					ratingService.getUserRating(getGameName(), userController.getLoggedPlayer().getLogin()));
 			model.addAttribute("isFavourite",
-					favouriteService.isFavourite(userController.getLoggedPlayer().getLogin(), game));
+					favouriteService.isFavourite(userController.getLoggedPlayer().getLogin(), getGameName()));
 			model.addAttribute("userFavourites",
 					favouriteService.getFavourites(userController.getLoggedPlayer().getLogin()));
 		}
 	}
 
-	protected void addNewComment(String newComment, Model model) {
-		commentService
-				.addComment(new Comment(userController.getLoggedPlayer().getLogin(), game, newComment, new Date()));
-	}
-
-	protected void updateNewRating(String value, Model model) {
-		System.err.println(game);
-		try {
-			ratingService
-					.setRating(new Rating(userController.getLoggedPlayer().getLogin(), game, Integer.parseInt(value)));
-		} catch (NumberFormatException e) {
-			e.printStackTrace();
-		}
-	}
-
 	protected void setNewFavourite(Model model) {
-		favouriteService.addFavourite(new Favourite(game, userController.getLoggedPlayer().getLogin()));
+		favouriteService.addFavourite(new Favourite(getGameName(), userController.getLoggedPlayer().getLogin()));
+	}
+	
+	public String getMessage() {
+		return message;
+	}
+	
+	protected abstract String getGameName();
+	
+	public abstract String render();
+	
 	}
 
-}
+

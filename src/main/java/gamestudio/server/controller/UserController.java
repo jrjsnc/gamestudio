@@ -1,13 +1,19 @@
 package gamestudio.server.controller;
 
+import java.util.Date;
+
+import org.hibernate.dialect.identity.GetGeneratedKeysDelegate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.WebApplicationContext;
 
+import gamestudio.entity.Comment;
 import gamestudio.entity.Player;
+import gamestudio.service.CommentService;
 import gamestudio.service.FavouriteService;
 import gamestudio.service.PlayerService;
 import gamestudio.service.RatingService;
@@ -24,8 +30,21 @@ public class UserController {
 
 	@Autowired
 	private RatingService ratingService;
-
+	
+	@Autowired
+	private CommentService commentService;
+	
 	private Player loggedPlayer;
+	
+//	
+//	@RequestMapping("/addComment")
+//	public String addComment(@RequestParam(value = "content", required = false)  String content, @RequestParam(value = "game", required = false) String game, Model model) {
+//		Comment comment = new Comment(getLoggedPlayer().getLogin(), game, content, new Date());		
+//		System.out.println(">>>>>>>" + comment);
+//		commentService.addComment(comment);			
+//		return "forward:/" + comment.getGame(); 
+//	}
+	
 
 	@RequestMapping("/")
 	public String index(Model model) {
@@ -37,10 +56,10 @@ public class UserController {
 		if (isLogged()) {
 			model.addAttribute("userFavourites", favouriteService.getFavourites(getLoggedPlayer().getLogin()));
 		}
-		model.addAttribute("minesRating", ratingService.getAverageRating("Mines"));
-		model.addAttribute("puzzleRating", ratingService.getAverageRating("Puzzle"));
-		model.addAttribute("guessRating", ratingService.getAverageRating("Guess"));
-		// model.addAttribute("pexesoRating", ratingService.getAverageRating("Pexeso"))
+		model.addAttribute("minesRating", ratingService.getAverageRating("mines"));
+		model.addAttribute("puzzleRating", ratingService.getAverageRating("puzzle"));
+		model.addAttribute("guessRating", ratingService.getAverageRating("guess"));
+		// model.addAttribute("pexesoRating", ratingService.getAverageRating("pexeso"))
 	}
 
 	@RequestMapping("/user")

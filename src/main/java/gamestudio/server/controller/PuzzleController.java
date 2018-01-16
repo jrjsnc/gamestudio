@@ -21,30 +21,29 @@ public class PuzzleController extends GeneralController {
 		return message;
 	}	
 
-	@RequestMapping("/updateRating_puzzle")
-	public String updateRating(@RequestParam(value = "value", required = false) String value, Model model) {
-		updateNewRating(value, model);
-		fillModel(model);
-		return "puzzle";
-	}
+//	@RequestMapping("/updateRating_puzzle")
+//	public String updateRating(@RequestParam(value = "value", required = false) String value, Model model) {
+//		updateNewRating(value, model);
+//		fillModel(model);
+//		return "puzzle";
+//	}
 
-	@RequestMapping("/addComment_puzzle")
-	public String addComment(@RequestParam(value = "newComment", required = false) String newComment, Model model) {
-		addNewComment(newComment, model);
-		fillModel(model);
-		return "puzzle";
-	}
+//	@RequestMapping("/addComment_puzzle")
+//	public String addComment(@RequestParam(value = "newComment", required = false) String newComment, Model model) {
+//		addNewComment(newComment, model);
+//		fillModel(model);
+//		return "puzzle";
+//	}
 
-	@RequestMapping("/setFavourite_puzzle")
-	public String setFavourite(Model model) {
-		setNewFavourite(model);
-		fillModel(model);
-		return "puzzle";
-	}
+//	@RequestMapping("/setFavourite_puzzle")
+//	public String setFavourite(Model model) {
+//		setNewFavourite(model);
+//		fillModel(model);
+//		return "puzzle";
+//	}
 
 	@RequestMapping("/puzzle")
-	public String puzzle(@RequestParam(value = "value", required = false) String value, Model model) {
-		setGame("Puzzle");
+	public String puzzle(@RequestParam(value = "value", required = false) String value, Model model) {		
 		processCommand(value);
 		fillModel(model);
 		return "puzzle";
@@ -57,7 +56,7 @@ public class PuzzleController extends GeneralController {
 				message = "SOLVED";
 				if (userController.isLogged())
 					scoreService
-							.addScore(new Score(userController.getLoggedPlayer().getLogin(), getGame(), getWinningTime()));
+							.addScore(new Score(userController.getLoggedPlayer().getLogin(), getGameName(), getWinningTime()));
 			}
 		} catch (NumberFormatException e) {
 			createField();
@@ -93,5 +92,10 @@ public class PuzzleController extends GeneralController {
 	private void createField() {
 		field = new Field(2, 2);
 		message = "";
+	}
+
+	@Override
+	protected String getGameName() {
+		return "puzzle";
 	}
 }

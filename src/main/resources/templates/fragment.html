@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
-
 <body>
 
 	<div th:fragment="links">
@@ -11,44 +9,86 @@
 		<link rel="stylesheet" href="css/style2.css" />
 		<link rel="stylesheet"
 			href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" />
-
-
-
 	</div>
+<!-- 	<div th:fragment="links"> -->
 
 
 	<div th:fragment="footer">
-
-		<footer id="main-footer" class="grid">
-		
+		<footer id="main-footer" class="grid">		
 		<div><a href="/">Gamestudio web</a></div>
-            <div>Project by Juraj</div>
-            
-
-			
-<!-- 				<a href="/" class="btn">index</a> -->
-			
-
-			
+            <div>Project by Juraj</div>              
 				<div th:if='${@userController.logged}'> Logged as <span
 					th:text='${@userController.loggedPlayer?.login}' /> <a
 					href="/logout">Logout</a>
-				</div>
-			
-
-			
+				</div>			
 				<div th:if='${not @userController.logged}'> <a href="/login"
 					>Log in</a>
-				</div>
-			
-			
+				</div>		
 			</footer>
 	</div>
-
+<!-- 	<div th:fragment="footer"> -->
 	
+	
+	<div th:fragment="comment">	
+	
+	<h3>Comments:</h3>
+	<ol>
+		<li th:each='comment : ${comments}'><span
+			th:text='${comment.createdOn}' /><span> </span> <span
+			th:text='${comment.username}' /><span> </span><span th:text='${comment.content}' /></li>
+	</ol>	
+	
+	<span th:if='${@userController.logged}'>
+	
+	<form action="/addComment" method="post">
+<input type="hidden" th:value='${game}' name="game"/>
+Comment: <input type="text" name="content"/>
+<input type="submit" value="Submit"/>
+</form>
+</span>	
+	</div>  
+<!-- 	<div th:fragment="comment">	 -->
 
+<div th:fragment="favourite">
+<span th:if='${@userController.logged}'>
+<form action="/addComment" method="post">
 
+</form>
+<a th:href='${"/setFavourite?game=" + game}'>
+<span th:if='${isFavourite}==false'>Add to favourites</span></a>
+</span>
+</div>
+<!-- <div th:fragment="favourite"> -->
 
+<div th:fragment="rating">
+		Average rating of this game: 
+		<span th:utext='${#numbers.formatDecimal(avgRating,1,2)}' />
+	
+	
+<span th:if='${@userController.logged}'>
+Your rating: <span th:text='${userRating}' /><br/>
+
+<div class="rating">
+
+	<a th:href='${"/updateRating?game=" + game + "&amp;value=1"}'><i class="fa fa-star fa-md"></i></a>
+	<a th:href='${"/updateRating?game=" + game + "&amp;value=2"}'><i class="fa fa-star fa-md"></i></a>
+	<a th:href='${"/updateRating?game=" + game + "&amp;value=3"}'><i class="fa fa-star fa-md"></i></a>
+	<a th:href='${"/updateRating?game=" + game + "&amp;value=4"}'><i class="fa fa-star fa-md"></i></a>
+	<a th:href='${"/updateRating?game=" + game + "&amp;value=5"}'><i class="fa fa-star fa-md"></i></a>
+	
+</div>
+</span>
+</div>
+<!-- <div th:fragment="rating"> -->
+
+<div th:fragment="score">
+<h3>Top 10 scores:</h3>
+	<ol>
+		<li th:each='score : ${scores}'><span th:text='${score.username}'/><span> </span>
+			<span th:text='${score.value}' /></li>
+	</ol>
+</div>
+<!-- <div th:fragment="score"> -->
 
 </body>
 </html>

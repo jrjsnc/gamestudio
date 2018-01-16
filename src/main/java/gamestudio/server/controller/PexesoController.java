@@ -25,7 +25,7 @@ public class PexesoController extends GeneralController {
 	@RequestMapping("/pexeso")
 	public String pexeso(@RequestParam(value = "row", required = false) String row,
 			@RequestParam(value = "column", required = false) String column, Model model) {
-		setGame("Pexeso");
+		//setGame("pexeso");
 		processCommand(row, column);
 		fillModel(model);
 		return "pexeso";
@@ -78,5 +78,10 @@ public class PexesoController extends GeneralController {
 	private void createField() {
 		field = new Field(4);
 		message = "";
+	}
+
+	@Override
+	protected String getGameName() {
+		return "pexeso";
 	}
 }

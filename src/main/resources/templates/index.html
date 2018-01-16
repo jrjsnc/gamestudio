@@ -32,12 +32,22 @@
 	<h2>Your favourite games:</h2>
 	<section id="section-b" class="grid">
 
+<table>
+	<th th:each='favorite : ${favorite}'>
+	<tr>
+	<a th:href='${favorite.game}'><img th:src='${"pictures/" + favorite.game + ".jpg" }' height="100" width="100"/> 
+	
+	</a>
+	 	  </tr>   
+	     </th>
+	    </table>
+
 		<ul>
 			<li th:each='favourite : ${userFavourites}'>
 				<div class="card">
 
 					<div class="card-content">
-						<h3 class="card-title" th:text='${favourite.game}' />
+						<h3 class="card-title"><a th:href='${favourite.game}'><span th:text='${favourite.game}'/></a></h3>
 					</div>
 				</div>
 			</li>

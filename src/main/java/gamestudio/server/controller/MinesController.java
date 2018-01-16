@@ -36,19 +36,19 @@ public class MinesController extends GeneralController {
 		return "mines";
 	}
 
-	@RequestMapping("/updateRating_mines")
-	public String updateRating(@RequestParam(value = "value", required = false) String value, Model model) {		
-		updateNewRating(value, model);
-		fillModel(model);
-		return "mines";
-	}
+//	@RequestMapping("/updateRating_mines")
+//	public String updateRating(@RequestParam(value = "value", required = false) String value, Model model) {		
+//		updateNewRating(value, model);
+//		fillModel(model);
+//		return "mines";
+//	}
 
-	@RequestMapping("/addComment_mines")
-	public String addComment(@RequestParam(value = "newComment", required = false) String newComment, Model model) {
-		addNewComment(newComment, model);
-		fillModel(model);
-		return "mines";
-	}
+//	@RequestMapping("/addComment_mines")
+//	public String addComment(@RequestParam(value = "newComment", required = false) String newComment, Model model) {
+//		addNewComment(newComment, model);
+//		fillModel(model);
+//		return "mines";
+//	}
 
 	@RequestMapping("/setFavourite_mines")
 	public String setFavourite(Model model) {
@@ -59,8 +59,7 @@ public class MinesController extends GeneralController {
 
 	@RequestMapping("/mines")
 	public String mines(@RequestParam(value = "row", required = false) String row,
-			@RequestParam(value = "column", required = false) String column, Model model) {
-		setGame("Mines");
+			@RequestParam(value = "column", required = false) String column, Model model) {		
 		processCommand(row, column);
 		fillModel(model);
 		return "mines";
@@ -127,5 +126,10 @@ public class MinesController extends GeneralController {
 	private void createField() {
 		field = new Field(9, 9, 10);
 		message = "";
+	}
+
+	@Override
+	protected String getGameName() {
+		return "mines";
 	}
 }
