@@ -25,10 +25,9 @@ public class PexesoController extends GeneralController {
 	@RequestMapping("/pexeso")
 	public String pexeso(@RequestParam(value = "row", required = false) String row,
 			@RequestParam(value = "column", required = false) String column, Model model) {
-		//setGame("pexeso");
 		processCommand(row, column);
 		fillModel(model);
-		return "pexeso";
+		return "game";
 	}
 
 	private void processCommand(String row, String column) {
@@ -59,14 +58,14 @@ public class PexesoController extends GeneralController {
 					image = "opened" + (tile.getValue());
 				}
 
-				sb.append("<td>\n");		
-				if(tile.getState() != TileState.OPENED && field.getState() == GameState.PLAYING)
+				sb.append("<td>\n");
+				if (tile.getState() != TileState.OPENED && field.getState() == GameState.PLAYING)
 					sb.append(String.format("<a href='/pexeso?row=%d&column=%d'>\n", row, column));
 				sb.append("<img src='/img/pexeso/" + image + ".png'>\n");
 				if (tile.getState() != TileState.OPENED && field.getState() == GameState.PLAYING)
 					sb.append("</a>\n");
 				sb.append("</td>\n");
-				
+
 			}
 			sb.append("</tr>\n");
 		}

@@ -33,36 +33,15 @@ public class MinesController extends GeneralController {
 	public String mines(Model model) {
 		marking = !marking;
 		fillModel(model);
-		return "mines";
-	}
-
-//	@RequestMapping("/updateRating_mines")
-//	public String updateRating(@RequestParam(value = "value", required = false) String value, Model model) {		
-//		updateNewRating(value, model);
-//		fillModel(model);
-//		return "mines";
-//	}
-
-//	@RequestMapping("/addComment_mines")
-//	public String addComment(@RequestParam(value = "newComment", required = false) String newComment, Model model) {
-//		addNewComment(newComment, model);
-//		fillModel(model);
-//		return "mines";
-//	}
-
-	@RequestMapping("/setFavourite_mines")
-	public String setFavourite(Model model) {
-		setNewFavourite(model);
-		fillModel(model);
-		return "mines";
+		return "game";
 	}
 
 	@RequestMapping("/mines")
 	public String mines(@RequestParam(value = "row", required = false) String row,
-			@RequestParam(value = "column", required = false) String column, Model model) {		
+			@RequestParam(value = "column", required = false) String column, Model model) {
 		processCommand(row, column);
 		fillModel(model);
-		return "mines";
+		return "game";
 	}
 
 	private void processCommand(String row, String column) {
@@ -119,6 +98,16 @@ public class MinesController extends GeneralController {
 
 		}
 		sb.append("</table>\n");
+
+		sb.append("<br/>");
+		sb.append("Action set to: ");
+		sb.append("<a href='/mines_mark'>");
+		if (marking)
+			sb.append("Marking");
+		else
+			sb.append("Opening");
+
+		sb.append("</a>");
 
 		return sb.toString();
 	}

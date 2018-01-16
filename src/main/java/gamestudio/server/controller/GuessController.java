@@ -15,38 +15,11 @@ import gamestudio.game.guess.Logic;
 public class GuessController extends GeneralController {
 	private Logic logic;
 
-
-	
-	
-	
-
-//	@RequestMapping("/updateRating_guess")
-//	public String updateRating(@RequestParam(value = "value", required = false) String value, Model model) {
-//		updateNewRating(value, model);
-//		fillModel(model);
-//		return "guess";
-//	}
-
-//	@RequestMapping("/addComment_guess")
-//	public String addComment(@RequestParam(value = "newComment", required = false) String newComment, Model model) {
-//		addNewComment(newComment, model);
-//		fillModel(model);
-//		return "guess";
-//	}
-
-//	@RequestMapping("/setFavourite_guess")
-//	public String setFavourite(Model model) {
-//		setNewFavourite(model);
-//		fillModel(model);
-//		return "guess";
-//	}
-
 	@RequestMapping("/guess")
 	public String guess(@RequestParam(value = "value", required = false) String value, Model model) {
-
 		processCommand(value);
 		fillModel(model);
-		return "guess";
+		return "game";
 	}
 
 	private void processCommand(String value) {
@@ -68,8 +41,11 @@ public class GuessController extends GeneralController {
 		StringBuilder sb = new StringBuilder();
 
 		if (message != "SOLVED") {
+			sb.append("<form  method='post' name='guessNumber' action='/guess'>");
 			sb.append(
-					"Guess the number: <input type='text' name='value' autofocus='autofocus'/> <input type='submit' value='Guess!' />");
+					"Guess the number: <input type='text' name='value' autofocus='autofocus'/> "
+					+ "<input type='submit' value='Guess!' />");
+			sb.append("</form>");			
 		}
 		return sb.toString();
 	}

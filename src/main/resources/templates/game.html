@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:text='${game}'/>
+
+<div th:replace="fragment::links" />
+
+</head>
+<body>
+
+	<p th:utext='${controller.render()}' />	
+	<p th:utext='${controller.message}' />
+
+	<a th:href='${"/" + game}'>New game</a>
+
+	<div th:replace="fragment::favourite" />
+	
+	<div th:replace="fragment::rating" />	
+	
+	<div th:replace="fragment::score" />
+	
+	<div th:replace="fragment::comment" />
+	
+	<div th:replace="fragment::footer" />		
+
+</body>
+</html>

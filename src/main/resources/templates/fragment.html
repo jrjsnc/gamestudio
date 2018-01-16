@@ -32,10 +32,15 @@
 	<div th:fragment="comment">	
 	
 	<h3>Comments:</h3>
+	
+<!-- 	onsubmit="return validateCommentForm()" -->
+	
 	<ol>
 		<li th:each='comment : ${comments}'><span
-			th:text='${comment.createdOn}' /><span> </span> <span
-			th:text='${comment.username}' /><span> </span><span th:text='${comment.content}' /></li>
+			th:text='${comment.createdOn}' /><span> </span> 
+			<span th:text='${comment.username}' />
+			<span> </span>
+			<span th:text='${comment.content}' /></li>
 	</ol>	
 	
 	<span th:if='${@userController.logged}'>

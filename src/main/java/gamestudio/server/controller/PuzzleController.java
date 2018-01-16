@@ -21,32 +21,11 @@ public class PuzzleController extends GeneralController {
 		return message;
 	}	
 
-//	@RequestMapping("/updateRating_puzzle")
-//	public String updateRating(@RequestParam(value = "value", required = false) String value, Model model) {
-//		updateNewRating(value, model);
-//		fillModel(model);
-//		return "puzzle";
-//	}
-
-//	@RequestMapping("/addComment_puzzle")
-//	public String addComment(@RequestParam(value = "newComment", required = false) String newComment, Model model) {
-//		addNewComment(newComment, model);
-//		fillModel(model);
-//		return "puzzle";
-//	}
-
-//	@RequestMapping("/setFavourite_puzzle")
-//	public String setFavourite(Model model) {
-//		setNewFavourite(model);
-//		fillModel(model);
-//		return "puzzle";
-//	}
-
 	@RequestMapping("/puzzle")
 	public String puzzle(@RequestParam(value = "value", required = false) String value, Model model) {		
 		processCommand(value);
 		fillModel(model);
-		return "puzzle";
+		return "game";
 	}
 
 	private void processCommand(String value) {
