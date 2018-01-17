@@ -1,20 +1,19 @@
 package gamestudio.server.controller;
 
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.hibernate.dialect.identity.GetGeneratedKeysDelegate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.WebApplicationContext;
 
-import gamestudio.entity.Comment;
+import gamestudio.entity.Game;
 import gamestudio.entity.Player;
-import gamestudio.service.CommentService;
 import gamestudio.service.FavouriteService;
+import gamestudio.service.GameService;
 import gamestudio.service.PlayerService;
 import gamestudio.service.RatingService;
 
@@ -29,22 +28,12 @@ public class UserController {
 	private FavouriteService favouriteService;
 
 	@Autowired
-	private RatingService ratingService;
+	private RatingService ratingService;	
 	
 	@Autowired
-	private CommentService commentService;
+	private GameService gameService;
 	
-	private Player loggedPlayer;
-	
-//	
-//	@RequestMapping("/addComment")
-//	public String addComment(@RequestParam(value = "content", required = false)  String content, @RequestParam(value = "game", required = false) String game, Model model) {
-//		Comment comment = new Comment(getLoggedPlayer().getLogin(), game, content, new Date());		
-//		System.out.println(">>>>>>>" + comment);
-//		commentService.addComment(comment);			
-//		return "forward:/" + comment.getGame(); 
-//	}
-	
+	private Player loggedPlayer;	
 
 	@RequestMapping("/")
 	public String index(Model model) {
@@ -53,13 +42,16 @@ public class UserController {
 	}
 
 	private void fillModel(Model model) {
+		List<Game> games = gameService.getGames();
+		addRatingToGames(games);
+		model.addAttribute("games", games);
+		
 		if (isLogged()) {
-			model.addAttribute("userFavourites", favouriteService.getFavourites(getLoggedPlayer().getLogin()));
-		}
-		model.addAttribute("minesRating", ratingService.getAverageRating("mines"));
-		model.addAttribute("puzzleRating", ratingService.getAverageRating("puzzle"));
-		model.addAttribute("guessRating", ratingService.getAverageRating("guess"));
-		// model.addAttribute("pexesoRating", ratingService.getAverageRating("pexeso"))
+			System.err.println(games.toString());
+			//model.addAttribute("userFavourites", favouriteService.getFavourites(getLoggedPlayer().getLogin()));
+			model.addAttribute("userFavourites", gameService.getFavouriteGames(getLoggedPlayer().getLogin()));		
+		}		
+		
 	}
 
 	@RequestMapping("/user")
@@ -71,7 +63,7 @@ public class UserController {
 	public String login(Player player, Model model) {
 		loggedPlayer = playerService.login(player.getLogin(), player.getPassword());
 		if (isLogged()) {
-			model.addAttribute("userFavourites", favouriteService.getFavourites(getLoggedPlayer().getLogin()));
+			//model.addAttribute("userFavourites", favouriteService.getFavourites(getLoggedPlayer().getLogin()));
 			fillModel(model);
 			return "index";
 		}
@@ -84,18 +76,25 @@ public class UserController {
 			playerService.register(player);
 			loggedPlayer = playerService.login(player.getLogin(), player.getPassword());
 			model.addAttribute("message", "");
+			fillModel(model);
 			return "index";
 		}		
 		model.addAttribute("message", "Name already used. Try another name.");
-		return "login"; 
-		//return isLogged() ? "index" : "login";
+		return "login";		
 	}
 
 	@RequestMapping("/logout")
 	public String login(Model model) {
 		loggedPlayer = null;
+		fillModel(model);
 		return "index";
 	}
+	
+	private void addRatingToGames(List<Game> games) {
+		for (Game game : games) {
+			game.setRating(ratingService.getAverageRating(game.getIdent()));
+		}
+	}	
 
 	public Player getLoggedPlayer() {
 		return loggedPlayer;

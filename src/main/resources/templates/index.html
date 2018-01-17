@@ -31,88 +31,85 @@
 
 	<h2>Your favourite games:</h2>
 	<section id="section-b" class="grid">
-
-<table>
-	<th th:each='favorite : ${favorite}'>
-	<tr>
-	<a th:href='${favorite.game}'><img th:src='${"pictures/" + favorite.game + ".jpg" }' height="100" width="100"/> 
 	
-	</a>
-	 	  </tr>   
-	     </th>
-	    </table>
-
 		<ul>
-			<li th:each='favourite : ${userFavourites}'>
+			<li th:each='game : ${userFavourites}'>
 				<div class="card">
 
 					<div class="card-content">
-						<h3 class="card-title"><a th:href='${favourite.game}'><span th:text='${favourite.game}'/></a></h3>
+						<a th:href= '${"/" + game.ident}' th:text= '${game.name}'/><span th:text='${game.rating}'></span>
 					</div>
 				</div>
 			</li>
 		</ul>
+		
 	</section>
 
 </span>
 
 <h2>Games to play:</h2>
 <section id="section-b" class="grid">
-	<ul>
-		<li>
-			<div class="card">
-				<a href="/guess"><img src="img/gs/guess_game.jpeg" alt="" /></a>
-				<div class="card-content">
-					<h3 class="card-title">Guess the number</h3>
-					<p>
-						Rating: <span id="rating-guess" th:text='${guessRating}' /><i
-							class="fa fa-star fa-md"></i>
-					</p>
-					<p>This thrilling game with insane logic will drive you crazy!</p>
-				</div>
-			</div>
-		</li>
-		<li>
-			<div class="card">
-				<a href="/mines"><img src="img/gs/mines_detector.jpg" alt="" /></a>
-				<div class="card-content">
-					<h3 class="card-title">Minesweeper</h3>
-					<p>
-						Rating: <span id="rating-mines" th:text='${minesRating}' /><i
-							class="fa fa-star fa-md"></i>
-					</p>
-					<p>Are you fascinated by the beeps of your metal-detector?</p>
-				</div>
-			</div>
-		</li>
-		<li>
-			<div class="card">
-				<a href="/puzzle"><img src="img/gs/stones.jpeg" alt="" /></a>
-				<div class="card-content">
-					<h3 class="card-title">Stones Puzzle</h3>
-					<p>
-						Rating: <span id="rating-puzzle" th:text='${puzzleRating}' /><i
-							class="fa fa-star fa-md"></i>
-					</p>
-					<p>Only a fool would rate this game less than 5 stars!</p>
-				</div>
-			</div>
-		</li>
+
+<div th:each= 'game: ${games}'>
+<a th:href= '${"/" + game.ident}' th:text= '${game.name}'/><span th:text='${game.rating}'></span>
+<div th:text= '${game.description}'/>
+</div>
+
+<!-- 	<ul> -->
+<!-- 		<li> -->
+<!-- 			<div class="card"> -->
+<!-- 				<a href="/guess"><img src="img/gs/guess_game.jpeg" alt="" /></a> -->
+<!-- 				<div class="card-content"> -->
+<!-- 					<h3 class="card-title">Guess the number</h3> -->
+<!-- 					<p> -->
+<!-- 						Rating: <span id="rating-guess" th:text='${guessRating}' /><i -->
+<!-- 							class="fa fa-star fa-md"></i> -->
+<!-- 					</p> -->
+<!-- 					<p>This thrilling game with insane logic will drive you crazy!</p> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</li> -->
+<!-- 		<li> -->
+<!-- 			<div class="card"> -->
+<!-- 				<a href="/mines"><img src="img/gs/mines_detector.jpg" alt="" /></a> -->
+<!-- 				<div class="card-content"> -->
+<!-- 					<h3 class="card-title">Minesweeper</h3> -->
+<!-- 					<p> -->
+<!-- 						Rating: <span id="rating-mines" th:text='${minesRating}' /><i -->
+<!-- 							class="fa fa-star fa-md"></i> -->
+<!-- 					</p> -->
+<!-- 					<p>Are you fascinated by the beeps of your metal-detector?</p> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</li> -->
+<!-- 		<li> -->
+<!-- 			<div class="card"> -->
+<!-- 				<a href="/puzzle"><img src="img/gs/stones.jpeg" alt="" /></a> -->
+<!-- 				<div class="card-content"> -->
+<!-- 					<h3 class="card-title">Stones Puzzle</h3> -->
+<!-- 					<p> -->
+<!-- 						Rating: <span id="rating-puzzle" th:text='${puzzleRating}' /><i -->
+<!-- 							class="fa fa-star fa-md"></i> -->
+<!-- 					</p> -->
+<!-- 					<p>Only a fool would rate this game less than 5 stars!</p> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</li> -->
 		
-		<li>
-			<div class="card">
-				<a href="/mines"><img src="img/gs/mines_detector.jpg" alt="" /></a>
-				<div class="card-content">
-					<h3 class="card-title">Minesweeper</h3>
-					<p>
-						Rating: <span id="rating-mines" th:text='${minesRating}' /><i
-							class="fa fa-star fa-md"></i>
-					</p>
-					<p>Are you fascinated by the beeps of your metal-detector?</p>
-				</div>
-			</div>
-		</li>		
-	</ul>
+<!-- 		<li> -->
+<!-- 			<div class="card"> -->
+<!-- 				<a href="/mines"><img src="img/gs/mines_detector.jpg" alt="" /></a> -->
+<!-- 				<div class="card-content"> -->
+<!-- 					<h3 class="card-title">Minesweeper</h3> -->
+<!-- 					<p> -->
+<!-- 						Rating: <span id="rating-mines" th:text='${minesRating}' /><i -->
+<!-- 							class="fa fa-star fa-md"></i> -->
+<!-- 					</p> -->
+<!-- 					<p>Are you fascinated by the beeps of your metal-detector?</p> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</li>		 -->
+<!-- 	</ul> -->
 </section>
 
 

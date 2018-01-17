@@ -7,11 +7,13 @@ import org.springframework.context.annotation.Bean;
 
 import gamestudio.service.CommentService;
 import gamestudio.service.FavouriteService;
+import gamestudio.service.GameService;
 import gamestudio.service.PlayerService;
 import gamestudio.service.RatingService;
 import gamestudio.service.ScoreService;
 import gamestudio.service.impl.CommentServiceJPA;
 import gamestudio.service.impl.FavouriteServiceJPA;
+import gamestudio.service.impl.GameServiceJPA;
 import gamestudio.service.impl.PlayerServiceJPA;
 import gamestudio.service.impl.RatingServiceJPA;
 import gamestudio.service.impl.ScoreServiceJPA;
@@ -48,5 +50,10 @@ public class GameStudioServer {
   @Bean
   public PlayerService playerService() {
 	  return new PlayerServiceJPA();
+  }
+  
+  @Bean
+  public GameService gameService() {
+	  return new GameServiceJPA();
   }
 }

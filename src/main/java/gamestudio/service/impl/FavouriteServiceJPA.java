@@ -54,8 +54,7 @@ public class FavouriteServiceJPA implements FavouriteService {
 					.setParameter("username", username).setParameter("game", game).getSingleResult();
 		} catch (NoResultException e){
 			return false;	
-			}
-		
+			}		
 		return true;
 	}
 
