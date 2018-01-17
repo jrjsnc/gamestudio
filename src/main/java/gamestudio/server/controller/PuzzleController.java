@@ -14,6 +14,7 @@ import gamestudio.game.puzzle.core.Field;
 @Scope(WebApplicationContext.SCOPE_SESSION)
 public class PuzzleController extends GeneralController {
 	private Field field;
+	
 
 	private String message;
 
@@ -35,15 +36,16 @@ public class PuzzleController extends GeneralController {
 				message = "SOLVED";
 				if (userController.isLogged())
 					scoreService
-							.addScore(new Score(userController.getLoggedPlayer().getLogin(), getGameName(), getWinningTime()));
+							.addScore(new Score(userController.getLoggedPlayer().getLogin(), getGameName(), countScore()));
 			}
 		} catch (NumberFormatException e) {
-			createField();
+			createField(level);
 		}
 	}
 
-	private int getWinningTime() {
-		return (int) ((System.currentTimeMillis() - field.getStartTime()) / 1000);
+	private int countScore() {
+		//return (int) (((System.currentTimeMillis() - field.getStartTime()) / 1000)*level);
+		return (int) ((field.getFinishTime()/1000));
 	}
 
 	public String render() {
@@ -68,8 +70,8 @@ public class PuzzleController extends GeneralController {
 		return sb.toString();
 	}
 
-	private void createField() {
-		field = new Field(2, 2);
+	private void createField(int level) {		
+		field = new Field(level);		
 		message = "";
 	}
 

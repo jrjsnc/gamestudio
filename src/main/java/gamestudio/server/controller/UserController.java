@@ -47,9 +47,12 @@ public class UserController {
 		model.addAttribute("games", games);
 		
 		if (isLogged()) {
-			System.err.println(games.toString());
+			//System.err.println(games.toString());
 			//model.addAttribute("userFavourites", favouriteService.getFavourites(getLoggedPlayer().getLogin()));
-			model.addAttribute("userFavourites", gameService.getFavouriteGames(getLoggedPlayer().getLogin()));		
+			
+			
+			model.addAttribute("favouriteGames", gameService.getFavouriteGames(getLoggedPlayer().getLogin()));
+			//System.err.println(g.toString() + "ahoj");
 		}		
 		
 	}

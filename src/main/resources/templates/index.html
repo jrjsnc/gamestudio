@@ -29,91 +29,15 @@
 
 <span th:if='${@userController.logged}'>
 
-	<h2>Your favourite games:</h2>
-	<section id="section-b" class="grid">
-	
-		<ul>
-			<li th:each='game : ${userFavourites}'>
-				<div class="card">
+<h2>Your favourite games:</h2>
 
-					<div class="card-content">
-						<a th:href= '${"/" + game.ident}' th:text= '${game.name}'/><span th:text='${game.rating}'></span>
-					</div>
-				</div>
-			</li>
-		</ul>
-		
-	</section>
+<div th:replace='fragment::games_list(${favouriteGames})'/>
 
 </span>
 
 <h2>Games to play:</h2>
-<section id="section-b" class="grid">
 
-<div th:each= 'game: ${games}'>
-<a th:href= '${"/" + game.ident}' th:text= '${game.name}'/><span th:text='${game.rating}'></span>
-<div th:text= '${game.description}'/>
-</div>
-
-<!-- 	<ul> -->
-<!-- 		<li> -->
-<!-- 			<div class="card"> -->
-<!-- 				<a href="/guess"><img src="img/gs/guess_game.jpeg" alt="" /></a> -->
-<!-- 				<div class="card-content"> -->
-<!-- 					<h3 class="card-title">Guess the number</h3> -->
-<!-- 					<p> -->
-<!-- 						Rating: <span id="rating-guess" th:text='${guessRating}' /><i -->
-<!-- 							class="fa fa-star fa-md"></i> -->
-<!-- 					</p> -->
-<!-- 					<p>This thrilling game with insane logic will drive you crazy!</p> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 		</li> -->
-<!-- 		<li> -->
-<!-- 			<div class="card"> -->
-<!-- 				<a href="/mines"><img src="img/gs/mines_detector.jpg" alt="" /></a> -->
-<!-- 				<div class="card-content"> -->
-<!-- 					<h3 class="card-title">Minesweeper</h3> -->
-<!-- 					<p> -->
-<!-- 						Rating: <span id="rating-mines" th:text='${minesRating}' /><i -->
-<!-- 							class="fa fa-star fa-md"></i> -->
-<!-- 					</p> -->
-<!-- 					<p>Are you fascinated by the beeps of your metal-detector?</p> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 		</li> -->
-<!-- 		<li> -->
-<!-- 			<div class="card"> -->
-<!-- 				<a href="/puzzle"><img src="img/gs/stones.jpeg" alt="" /></a> -->
-<!-- 				<div class="card-content"> -->
-<!-- 					<h3 class="card-title">Stones Puzzle</h3> -->
-<!-- 					<p> -->
-<!-- 						Rating: <span id="rating-puzzle" th:text='${puzzleRating}' /><i -->
-<!-- 							class="fa fa-star fa-md"></i> -->
-<!-- 					</p> -->
-<!-- 					<p>Only a fool would rate this game less than 5 stars!</p> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 		</li> -->
-		
-<!-- 		<li> -->
-<!-- 			<div class="card"> -->
-<!-- 				<a href="/mines"><img src="img/gs/mines_detector.jpg" alt="" /></a> -->
-<!-- 				<div class="card-content"> -->
-<!-- 					<h3 class="card-title">Minesweeper</h3> -->
-<!-- 					<p> -->
-<!-- 						Rating: <span id="rating-mines" th:text='${minesRating}' /><i -->
-<!-- 							class="fa fa-star fa-md"></i> -->
-<!-- 					</p> -->
-<!-- 					<p>Are you fascinated by the beeps of your metal-detector?</p> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 		</li>		 -->
-<!-- 	</ul> -->
-</section>
-
-
-
+<div th:replace='fragment::games_list(${games})'/>
 
 <div th:replace="fragment::footer" />
 

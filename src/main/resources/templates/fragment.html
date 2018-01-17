@@ -91,5 +91,17 @@ Your rating: <span th:text='${userRating}' /><br/>
 </div>
 <!-- <div th:fragment="score"> -->
 
+
+<div th:fragment='games_list(games)'> 
+<ol>
+<li th:each='game: ${games}'><a th:href= '${"/" + game.ident}' th:text= '${game.name}'/><span th:text='${game.rating}'></span>
+<div th:text= '${game.description}'/></li>
+</ol>
+</div>
+
+<!-- <div th:fragment='games_list(games)'> -->
+
+
+
 </body>
 </html>

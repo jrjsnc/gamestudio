@@ -7,7 +7,7 @@ import gamestudio.consoleUI.ConsoleGameUI;
 import gamestudio.game.puzzle.core.Field;
 
 public class ConsoleUI implements ConsoleGameUI {
-	private Field field = new Field(4, 5);
+	private Field field = new Field(0);
 	private Scanner scanner = new Scanner(System.in);
 
 	@Override

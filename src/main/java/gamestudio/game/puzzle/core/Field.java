@@ -8,19 +8,20 @@ public class Field {
 	private final int[][] tiles;
 	public static final int EMPTY_TILE = 0;
 	private long startTime;
+	private long finishTime;
 	
 
-	public Field(int rowCount, int columnCount) {
-		this.rowCount = rowCount;
-		this.columnCount = columnCount;
+	public Field(int level) {
+		this.rowCount = 3+level;
+		this.columnCount = 3+level;
 		tiles = new int[rowCount][columnCount];
 		generate();
 		startTime = System.currentTimeMillis();		
 	}
 	
 	
-	public long getStartTime() {
-		return startTime;
+	public long getFinishTime() {
+		return finishTime;
 	}
 
 	public int getRowCount() {
@@ -76,6 +77,7 @@ public class Field {
 				tile++;
 			}
 		}
+		finishTime = System.currentTimeMillis() - startTime;
 		return true;
 	}
 

@@ -33,6 +33,8 @@ public abstract class GeneralController {
 	protected Model gameModel;
 	
 	protected String message;	
+	
+	protected int level;
 
 	protected void fillModel(Model model) {
 		model.addAttribute("controller", this);
@@ -53,6 +55,10 @@ public abstract class GeneralController {
 	
 	public String getMessage() {
 		return message;
+	}
+	
+	public void setLevel(int level) {
+		this.level = level;
 	}
 	
 	protected abstract String getGameName();
