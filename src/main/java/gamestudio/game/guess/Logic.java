@@ -6,16 +6,16 @@ public class Logic {
 
 	private final int range;
 	private final int number;
-	private Long startTime;
+	private long startTime;	
 
 	public Logic(int range) {
 		this.range = range;
 		number = getRandom(range);
 		startTime = System.currentTimeMillis();
-	}
+	}	
 	
-	public Long getStartTime() {
-		return startTime;
+	public long getFinishTime() {		
+		return System.currentTimeMillis() - startTime;
 	}
 
 	public int getRange() {

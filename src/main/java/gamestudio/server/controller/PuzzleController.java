@@ -26,28 +26,28 @@ public class PuzzleController extends GeneralController {
 	@RequestMapping("/setLevelpuzzle")
 	public String setLevelPuzzle(@RequestParam(value = "level", required = false) String level, Model model) {	
 		super.level = Integer.parseInt(level);
-		field = new Field(super.level);
+		field = new Field(super.level);		
 		fillModel(model);		
 		return "game";
 	}
 
 	private void processCommand(String value) {
 		try {
-			field.moveTile(Integer.parseInt(value));
+			field.moveTile(Integer.parseInt(value));			
 			if (field.isSolved()) {
 				message = "SOLVED";
 				if (userController.isLogged())
-					scoreService
-							.addScore(new Score(userController.getLoggedPlayer().getLogin(), getGameName(), countScore()));
+					addScore();
 			}
 		} catch (NumberFormatException e) {
 			createField();
 		}
 	}
 
-	private int countScore() {
-		//return (int) (((System.currentTimeMillis() - field.getStartTime()) / 1000)*level);
-		return (int) ((field.getFinishTime()/1000));
+	private void addScore() {
+		int score = (int)((field.getFinishTime()/1000)*1/level);
+		scoreService.addScore(new Score(userController.getLoggedPlayer().getLogin(), getGameName(), score));
+		
 	}
 
 	public String render() {
@@ -71,11 +71,6 @@ public class PuzzleController extends GeneralController {
 		sb.append("</table>\n");
 		return sb.toString();
 	}
-
-//	private void createField() {		
-//		field = new Field(level +1);		
-//		message = "";
-//	}
 	
 	private void createField() {
 		level = 1;

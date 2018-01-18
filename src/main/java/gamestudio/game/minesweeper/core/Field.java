@@ -6,24 +6,14 @@ import javax.naming.OperationNotSupportedException;
 
 public class Field {
 	private final int rowCount;
-
 	private final int columnCount;
-
-	private final int mineCount;
-
-	private int cluesCount = 0;
+	private final int mineCount;	
+	private long startTime;	
 
 	private GameState state = GameState.PLAYING;
 
 	private final Tile[][] tiles;
 
-//	public Field(int rowCount, int columnCount, int mineCount) {
-//		this.rowCount = rowCount;
-//		this.columnCount = columnCount;
-//		this.mineCount = mineCount;
-//		tiles = new Tile[rowCount][columnCount];
-//		generate();
-//	}
 	
 	public Field(int level) {
 		this.rowCount = 5 + level;
@@ -31,11 +21,17 @@ public class Field {
 		this.mineCount = 5*level;
 		tiles = new Tile[5 + level][5 + level];
 		generate();
+		startTime = System.currentTimeMillis();	
+	}
+	
+	public long getFinishTime() {		
+		return System.currentTimeMillis() - startTime;
 	}
 
+
 	private void generate() {
-		generateMines();
-		//generateFixedMines();
+		//generateMines();
+		generateFixedMines();
 		fillWithClues();
 	}
 

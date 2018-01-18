@@ -13,7 +13,7 @@ import gamestudio.game.minesweeper.core.Mine;
 import gamestudio.game.minesweeper.core.Tile;
 
 public class ConsoleUI implements ConsoleGameUI {
-	private Field field = new Field(9, 9, 10);
+	private Field field = new Field(10);
 	private Scanner scanner = new Scanner(System.in);
 
 	private static final Pattern INPUT_PATTERN = Pattern.compile("([OM])([A-I])([1-9])");

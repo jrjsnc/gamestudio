@@ -9,7 +9,6 @@ import org.springframework.web.context.WebApplicationContext;
 
 import gamestudio.entity.Score;
 import gamestudio.game.guess.Logic;
-import gamestudio.game.puzzle.core.Field;
 
 @Controller
 @Scope(WebApplicationContext.SCOPE_SESSION)
@@ -39,12 +38,18 @@ public class GuessController extends GeneralController {
 			if (logic.isSolved(Integer.parseInt(value))) {
 				message = "SOLVED";
 				if (userController.isLogged())
-					scoreService.addScore(
-							new Score(userController.getLoggedPlayer().getLogin(), getGameName(), getWinningTime()));
+					addScore();
 			}
 		} catch (NumberFormatException e) {
 			newGame();
+			System.err.println(logic.getNumber());
 		}
+	}	
+	
+	private void addScore() {
+		int score = (int)((logic.getFinishTime()/1000)*1/level);
+		scoreService.addScore(new Score(userController.getLoggedPlayer().getLogin(), getGameName(), score));
+		
 	}
 
 	public String render() {
@@ -58,16 +63,12 @@ public class GuessController extends GeneralController {
 			sb.append("</form>");			
 		}
 		return sb.toString();
-	}
-
-	private int getWinningTime() {
-		return (int) ((System.currentTimeMillis() - logic.getStartTime()) / 1000);
-	}
+	}	
 
 	private void newGame() {
 		level = 1;
 		logic = new Logic(level * 11);
-		message = "guess the number from 0 to "+ level * 11;
+		message = "guess the number from 0 to "+ level * 10;
 	}
 
 	@Override

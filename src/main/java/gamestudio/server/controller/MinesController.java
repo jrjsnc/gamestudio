@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.WebApplicationContext;
 
+import gamestudio.entity.Score;
 import gamestudio.game.minesweeper.core.Clue;
 import gamestudio.game.minesweeper.core.Field;
 import gamestudio.game.minesweeper.core.GameState;
@@ -57,10 +58,17 @@ public class MinesController extends GeneralController {
 				message = "FAILED";
 			} else if (field.getState() == GameState.SOLVED) {
 				message = "SOLVED";
+				addScore();
 			}
 		} catch (NumberFormatException e) {
 			createField();
 		}
+	}
+	
+	private void addScore() {
+		int score = (int)((field.getFinishTime()/1000)*1/level);
+		scoreService.addScore(new Score(userController.getLoggedPlayer().getLogin(), getGameName(), score));
+		
 	}
 
 	public String render() {
