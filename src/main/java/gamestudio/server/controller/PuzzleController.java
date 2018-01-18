@@ -14,18 +14,20 @@ import gamestudio.game.puzzle.core.Field;
 @Scope(WebApplicationContext.SCOPE_SESSION)
 public class PuzzleController extends GeneralController {
 	private Field field;
-	
 
-	private String message;
-
-	public String getMessage() {
-		return message;
-	}	
 
 	@RequestMapping("/puzzle")
 	public String puzzle(@RequestParam(value = "value", required = false) String value, Model model) {		
 		processCommand(value);
 		fillModel(model);
+		return "game";
+	}
+	
+	@RequestMapping("/setLevelpuzzle")
+	public String setLevelPuzzle(@RequestParam(value = "level", required = false) String level, Model model) {	
+		super.level = Integer.parseInt(level);
+		field = new Field(super.level);
+		fillModel(model);		
 		return "game";
 	}
 
@@ -39,7 +41,7 @@ public class PuzzleController extends GeneralController {
 							.addScore(new Score(userController.getLoggedPlayer().getLogin(), getGameName(), countScore()));
 			}
 		} catch (NumberFormatException e) {
-			createField(level);
+			createField();
 		}
 	}
 
@@ -70,13 +72,19 @@ public class PuzzleController extends GeneralController {
 		return sb.toString();
 	}
 
-	private void createField(int level) {		
-		field = new Field(level);		
+//	private void createField() {		
+//		field = new Field(level +1);		
+//		message = "";
+//	}
+	
+	private void createField() {
+		level = 1;
+		field = new Field(level);
 		message = "";
 	}
 
 	@Override
 	protected String getGameName() {
 		return "puzzle";
-	}
+	}	
 }

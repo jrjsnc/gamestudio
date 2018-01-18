@@ -17,11 +17,19 @@ public class Field {
 
 	private final Tile[][] tiles;
 
-	public Field(int rowCount, int columnCount, int mineCount) {
-		this.rowCount = rowCount;
-		this.columnCount = columnCount;
-		this.mineCount = mineCount;
-		tiles = new Tile[rowCount][columnCount];
+//	public Field(int rowCount, int columnCount, int mineCount) {
+//		this.rowCount = rowCount;
+//		this.columnCount = columnCount;
+//		this.mineCount = mineCount;
+//		tiles = new Tile[rowCount][columnCount];
+//		generate();
+//	}
+	
+	public Field(int level) {
+		this.rowCount = 5 + level;
+		this.columnCount = 5 + level;
+		this.mineCount = 5*level;
+		tiles = new Tile[5 + level][5 + level];
 		generate();
 	}
 

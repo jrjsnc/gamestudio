@@ -42,12 +42,12 @@ public class ScoreServiceJDBC implements ScoreService {
 				List<Score> list = new ArrayList<>();
 				while (rs.next()) {
 					
-					Score score = new Score(rs.getString(2), rs.getString(3), rs.getInt(4));
+					//Score score = new Score(rs.getString(2), rs.getString(3), rs.getInt(4));
 //					score.setIdent(rs.getInt(1));
 //					score.setUsername(rs.getString(2));
 //					score.setGame(rs.getString(3));
 //					score.setValue(rs.getInt(4));
-					list.add(score);
+					//list.add(score);
 				}
 				return list;
 			}

@@ -3,7 +3,8 @@ package gamestudio.server.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 
-import gamestudio.entity.Favourite;
+
+
 import gamestudio.service.CommentService;
 import gamestudio.service.FavouriteService;
 import gamestudio.service.GameService;
@@ -30,13 +31,11 @@ public abstract class GeneralController {
 	@Autowired
 	protected GameService gameService;
 	
-	protected Model gameModel;
-	
-	protected String message;	
+	protected String message;
 	
 	protected int level;
 
-	protected void fillModel(Model model) {
+	protected void fillModel(Model model) {		
 		model.addAttribute("controller", this);
 		model.addAttribute("scores", scoreService.getTopScores(getGameName()));
 		model.addAttribute("avgRating", ratingService.getAverageRating(getGameName()));
@@ -57,14 +56,11 @@ public abstract class GeneralController {
 		return message;
 	}
 	
-	public void setLevel(int level) {
-		this.level = level;
-	}
+		
 	
 	protected abstract String getGameName();
 	
-	protected abstract String render();
-	
+	protected abstract String render();	
 	}
 
 

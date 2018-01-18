@@ -18,11 +18,15 @@ public class Score {
 	private String username;
 	private String game;
 	private int value;
+	
+	
+	
 
 	public Score(String username, String game, int value) {
 		this.username = username;
 		this.game = game;
 		this.value = value;
+		
 	}
 
 	public Score() {

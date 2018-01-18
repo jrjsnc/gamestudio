@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.WebApplicationContext;
 
 import gamestudio.entity.Comment;
@@ -56,7 +57,7 @@ public class ServiceController {
 	public String setFavourite(Favourite favourite, Model model) {
 		favouriteService.addFavourite(new Favourite(favourite.getGame(), userController.getLoggedPlayer().getLogin()));
 		return "forward:/" + favourite.getGame();
-	}
+	}	
 	
 	@RequestMapping("/setup")
 	public String setup(Model model) {

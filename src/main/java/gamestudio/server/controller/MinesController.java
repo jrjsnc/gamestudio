@@ -18,15 +18,10 @@ import gamestudio.game.minesweeper.core.TileState;
 public class MinesController extends GeneralController {
 	private Field field;
 
-	private boolean marking;
-	private String message;
+	private boolean marking;	
 
 	public boolean isMarking() {
 		return marking;
-	}
-
-	public String getMessage() {
-		return message;
 	}
 
 	@RequestMapping("/mines_mark")
@@ -41,6 +36,14 @@ public class MinesController extends GeneralController {
 			@RequestParam(value = "column", required = false) String column, Model model) {
 		processCommand(row, column);
 		fillModel(model);
+		return "game";
+	}
+	
+	@RequestMapping("/setLevelmines")
+	public String setLevelMines(@RequestParam(value = "level", required = false) String level, Model model) {	
+		super.level = Integer.parseInt(level);
+		field = new Field(super.level);
+		fillModel(model);		
 		return "game";
 	}
 
@@ -113,7 +116,8 @@ public class MinesController extends GeneralController {
 	}
 
 	private void createField() {
-		field = new Field(9, 9, 10);
+		level = 1;
+		field = new Field(level);
 		message = "";
 	}
 
@@ -121,4 +125,6 @@ public class MinesController extends GeneralController {
 	protected String getGameName() {
 		return "mines";
 	}
+	
+	
 }

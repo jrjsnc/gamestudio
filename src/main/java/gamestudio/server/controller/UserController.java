@@ -1,6 +1,5 @@
 package gamestudio.server.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,6 @@ import org.springframework.web.context.WebApplicationContext;
 
 import gamestudio.entity.Game;
 import gamestudio.entity.Player;
-import gamestudio.service.FavouriteService;
 import gamestudio.service.GameService;
 import gamestudio.service.PlayerService;
 import gamestudio.service.RatingService;
@@ -25,15 +23,12 @@ public class UserController {
 	private PlayerService playerService;
 
 	@Autowired
-	private FavouriteService favouriteService;
+	private RatingService ratingService;
 
 	@Autowired
-	private RatingService ratingService;	
-	
-	@Autowired
 	private GameService gameService;
-	
-	private Player loggedPlayer;	
+
+	private Player loggedPlayer;
 
 	@RequestMapping("/")
 	public String index(Model model) {
@@ -45,20 +40,15 @@ public class UserController {
 		List<Game> games = gameService.getGames();
 		addRatingToGames(games);
 		model.addAttribute("games", games);
-		
+
 		if (isLogged()) {
-			//System.err.println(games.toString());
-			//model.addAttribute("userFavourites", favouriteService.getFavourites(getLoggedPlayer().getLogin()));
-			
-			
 			model.addAttribute("favouriteGames", gameService.getFavouriteGames(getLoggedPlayer().getLogin()));
-			//System.err.println(g.toString() + "ahoj");
-		}		
-		
+		}
+
 	}
 
 	@RequestMapping("/user")
-	public String user(Model model) {		
+	public String user(Model model) {
 		return "login";
 	}
 
@@ -66,7 +56,6 @@ public class UserController {
 	public String login(Player player, Model model) {
 		loggedPlayer = playerService.login(player.getLogin(), player.getPassword());
 		if (isLogged()) {
-			//model.addAttribute("userFavourites", favouriteService.getFavourites(getLoggedPlayer().getLogin()));
 			fillModel(model);
 			return "index";
 		}
@@ -81,9 +70,9 @@ public class UserController {
 			model.addAttribute("message", "");
 			fillModel(model);
 			return "index";
-		}		
+		}
 		model.addAttribute("message", "Name already used. Try another name.");
-		return "login";		
+		return "login";
 	}
 
 	@RequestMapping("/logout")
@@ -92,12 +81,12 @@ public class UserController {
 		fillModel(model);
 		return "index";
 	}
-	
+
 	private void addRatingToGames(List<Game> games) {
 		for (Game game : games) {
 			game.setRating(ratingService.getAverageRating(game.getIdent()));
 		}
-	}	
+	}
 
 	public Player getLoggedPlayer() {
 		return loggedPlayer;

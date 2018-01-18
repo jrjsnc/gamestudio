@@ -15,7 +15,7 @@ public class Field {
 
 	public Field(int level) {
 		this.rowCount = 4;
-		this.columnCount = level;
+		this.columnCount = level+1;
 		tileCount = rowCount * columnCount;
 		tiles = new Tile[rowCount][columnCount];
 		generate();

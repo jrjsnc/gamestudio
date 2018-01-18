@@ -101,7 +101,13 @@ Your rating: <span th:text='${userRating}' /><br/>
 
 <!-- <div th:fragment='games_list(games)'> -->
 
+<div th:fragment="level">
+<a th:href='${"/setLevel" +game.ident+ "?level=1"}'>easy</a>
+<a th:href='${"/setLevel" +game.ident+ "?level=2"}'>medium</a>
+<a th:href='${"/setLevel" +game.ident+ "?level=3"}'>hard</a>
+</div>
 
+<!-- <div th:fragment="level"> -->
 
 </body>
 </html>

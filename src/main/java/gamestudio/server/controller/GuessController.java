@@ -9,6 +9,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import gamestudio.entity.Score;
 import gamestudio.game.guess.Logic;
+import gamestudio.game.puzzle.core.Field;
 
 @Controller
 @Scope(WebApplicationContext.SCOPE_SESSION)
@@ -19,6 +20,15 @@ public class GuessController extends GeneralController {
 	public String guess(@RequestParam(value = "value", required = false) String value, Model model) {
 		processCommand(value);
 		fillModel(model);
+		return "game";
+	}
+	
+	@RequestMapping("/setLevelguess")
+	public String setLevelGuess(@RequestParam(value = "level", required = false) String level, Model model) {	
+		super.level = Integer.parseInt(level);
+		message = "guess the number from 0 to "+ super.level * 11;
+		logic = new Logic(super.level * 11);		
+		fillModel(model);		
 		return "game";
 	}
 
@@ -55,8 +65,9 @@ public class GuessController extends GeneralController {
 	}
 
 	private void newGame() {
-		logic = new Logic(11);
-		message = "";
+		level = 1;
+		logic = new Logic(level * 11);
+		message = "guess the number from 0 to "+ level * 11;
 	}
 
 	@Override

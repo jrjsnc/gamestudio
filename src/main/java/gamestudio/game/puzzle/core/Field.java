@@ -12,8 +12,8 @@ public class Field {
 	
 
 	public Field(int level) {
-		this.rowCount = 3+level;
-		this.columnCount = 3+level;
+		this.rowCount = 2+level;
+		this.columnCount = 2+level;
 		tiles = new int[rowCount][columnCount];
 		generate();
 		startTime = System.currentTimeMillis();		

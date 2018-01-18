@@ -16,11 +16,6 @@ import gamestudio.game.pexeso.TileState;
 @Scope(WebApplicationContext.SCOPE_SESSION)
 public class PexesoController extends GeneralController {
 	private Field field;
-	private String message;
-
-	public String getMessage() {
-		return message;
-	}
 
 	@RequestMapping("/pexeso")
 	public String pexeso(@RequestParam(value = "row", required = false) String row,
@@ -73,9 +68,17 @@ public class PexesoController extends GeneralController {
 
 		return sb.toString();
 	}
+	
+	@RequestMapping("/setLevelpexeso")
+	public String setLevelv(@RequestParam(value = "level", required = false) String level, Model model) {	
+		super.level = Integer.parseInt(level);		
+		field = new Field(super.level);
+		fillModel(model);		
+		return "game";
+	}
 
 	private void createField() {
-		field = new Field(4);
+		field = new Field(level+1);
 		message = "";
 	}
 

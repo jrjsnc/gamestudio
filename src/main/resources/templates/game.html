@@ -11,7 +11,11 @@
 	<p th:utext='${controller.render()}' />	
 	<p th:utext='${controller.message}' />
 
-	<a th:href='${"/" + game}'>New game</a>
+
+	<div th:replace="fragment::level" />
+	<br/>
+
+	<a th:href='${"/" + game.ident}'>New game</a>
 
 	<div th:replace="fragment::favourite" />
 	
