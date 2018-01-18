@@ -1,5 +1,9 @@
 package gamestudio.service.impl;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -31,7 +35,7 @@ public class GameServiceJPA implements GameService {
 				.createQuery("SELECT g FROM Game g where EXISTS "
 						+ "(SELECT f FROM Favourite f where g.ident = f.game and f.username = :player)")
 				.setParameter("player", player).getResultList();
-	}	
+	}
 
 	public void setup() {
 		Game game;
@@ -43,6 +47,23 @@ public class GameServiceJPA implements GameService {
 		entityManager.persist(game);
 		game = new Game("pexeso", "Pexeso", "Don't have a mate? You'll definitely find some in this game");
 		entityManager.persist(game);
+
+//		File file = new File("img/gs/guess.jpeg");
+//		byte[] picInBytes = new byte[(int) file.length()];
+//		try {
+//			FileInputStream fileInputStream = new FileInputStream(file);
+//			fileInputStream.read(picInBytes);
+//			fileInputStream.close();
+//		} catch (FileNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		game = new Game("guess", "Guess the number", "This thrilling game with insane logic will drive you crazy!",
+//				picInBytes);
+//		entityManager.persist(game);
 
 	}
 

@@ -93,10 +93,16 @@ Your rating: <span th:text='${userRating}' /><br/>
 
 
 <div th:fragment='games_list(games)'> 
-<ol>
-<li th:each='game: ${games}'><a th:href= '${"/" + game.ident}' th:text= '${game.name}'/><span th:text='${game.rating}'></span>
-<div th:text= '${game.description}'/></li>
-</ol>
+<section id="section-b" class="grid">
+<ul>
+<li th:each='game: ${games}'>
+<div class="card">
+<a th:href= '${"/" + game.ident}' th:text= '${game.name}'/><span th:text='${game.rating}'></span>
+<div th:text= '${game.description}'/>
+</div>
+</li>
+</ul>
+</section>
 </div>
 
 <!-- <div th:fragment='games_list(games)'> -->
