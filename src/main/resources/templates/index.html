@@ -16,29 +16,37 @@
 	<div class="bg-image"></div>
 	<div class="content-wrap">
 		<h1>Welcome to gamestudio.</h1>
-		<p>culpa si anim quis malis quorum eruditionem do graviterque sint
-			praesentibus probant an fabulas duis malis quorum fore quo iudicem</p>
+		<p>The perfect place to have fun and relax. Want to get the best experience? Prepare some snacks first!</p>
 			<br/>
-		<a href="#section-b" class="btn">Read more</a>
+		<a href="#games" class="btn">List of our games</a>
+		<span th:if='${@userController.logged}'>
+		<br/>
+		<br/>
+		<br/>
+		<a href="#favouriteGames" class="btn">Your favourite games</a>
+		</span>
 	</div>
 </header>
 
-
-
 <main id="main"> 
+
+<h2 id="games">Games to play:</h2>
+
+<div th:replace='fragment::games_list(${games})'/>
 
 <span th:if='${@userController.logged}'>
 
-<h2>Your favourite games:</h2>
+<section id="section-c" class="grid">
+                <div class="content-wrap">
+                    <h2 class="content-title" id="favouriteGames">Your favourite games:</h2>                    
+                </div>
+            </section>
+
+<!-- <h2 id="favouriteGames">Your favourite games:</h2> -->
 
 <div th:replace='fragment::games_list(${favouriteGames})'/>
 
 </span>
-
-
-<h2>Games to play:</h2>
-
-<div th:replace='fragment::games_list(${games})'/>
 
 
 <div th:replace="fragment::footer" />

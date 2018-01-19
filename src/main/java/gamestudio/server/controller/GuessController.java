@@ -46,12 +46,14 @@ public class GuessController extends GeneralController {
 		}
 	}	
 	
-	private void addScore() {
+	@Override
+	protected void addScore() {
 		int score = (int)((logic.getFinishTime()/1000)*1/level);
 		scoreService.addScore(new Score(userController.getLoggedPlayer().getLogin(), getGameName(), score));
 		
 	}
 
+	@Override
 	public String render() {
 		StringBuilder sb = new StringBuilder();
 

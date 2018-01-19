@@ -1,10 +1,12 @@
 function validateCommentForm() {
-	var a = document.forms["addComment"]["newComment"].value;
+	var a = document.forms["form"]["content"].value;
 	if (a == null || a == "") {
 		window.alert("Please Fill All Required Fields");
 		return false;
 	}
 }
+
+document.querySelector('.hello').scrollIntoView({ behavior: 'smooth' });
 
 
 

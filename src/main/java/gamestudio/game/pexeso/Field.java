@@ -9,6 +9,7 @@ public class Field {
 	private final int columnCount;
 	private int tileCount;
 	private GameState state;
+	private long startTime;
 
 	private Tile[][] tiles;
 	private int[][] openedTiles = new int[2][2];;
@@ -19,6 +20,11 @@ public class Field {
 		tileCount = rowCount * columnCount;
 		tiles = new Tile[rowCount][columnCount];
 		generate();
+		startTime = System.currentTimeMillis();
+	}
+	
+	public long getFinishTime() {
+		return System.currentTimeMillis() - startTime;
 	}
 
 	public int getRowCount() {
@@ -105,17 +111,19 @@ public class Field {
             	 tiles[openedTiles[1][0]][openedTiles[1][1]].setState(TileState.CLOSED);
             	 openedTiles = new int[2][2];
              }
-		}
-		
-		if(isSolved()) {
-			setState(GameState.SOLVED);
-		}
+		}		
 	}
 	
 	public void move(int row, int column) {
 		controlMatch();
-		openTile(row, column);
+		openTile(row, column);		
+		if(isSolved()) {
+			setState(GameState.SOLVED);
+			return;
+		}
 	}
+
+	
 	
 
 

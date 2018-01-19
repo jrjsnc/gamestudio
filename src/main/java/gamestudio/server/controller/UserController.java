@@ -29,6 +29,8 @@ public class UserController {
 	private GameService gameService;
 
 	private Player loggedPlayer;
+	
+	private String message;
 
 	@RequestMapping("/")
 	public String index(Model model) {
@@ -56,9 +58,10 @@ public class UserController {
 	public String login(Player player, Model model) {
 		loggedPlayer = playerService.login(player.getLogin(), player.getPassword());
 		if (isLogged()) {
+			model.addAttribute("message", "");
 			fillModel(model);
 			return "index";
-		}
+		}		
 		return "login";
 	}
 
@@ -70,7 +73,7 @@ public class UserController {
 			model.addAttribute("message", "");
 			fillModel(model);
 			return "index";
-		}
+		}		
 		model.addAttribute("message", "Name already used. Try another name.");
 		return "login";
 	}

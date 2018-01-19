@@ -44,12 +44,14 @@ public class PuzzleController extends GeneralController {
 		}
 	}
 
-	private void addScore() {
+	@Override
+	protected void addScore() {
 		int score = (int)((field.getFinishTime()/1000)*1/level);
 		scoreService.addScore(new Score(userController.getLoggedPlayer().getLogin(), getGameName(), score));
 		
 	}
 
+	@Override
 	public String render() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("<table class='puzzle_field'>\n");

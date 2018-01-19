@@ -19,7 +19,7 @@ import gamestudio.game.minesweeper.core.TileState;
 public class MinesController extends GeneralController {
 	private Field field;
 
-	private boolean marking;	
+	private boolean marking;
 
 	public boolean isMarking() {
 		return marking;
@@ -39,12 +39,12 @@ public class MinesController extends GeneralController {
 		fillModel(model);
 		return "game";
 	}
-	
+
 	@RequestMapping("/setLevelmines")
-	public String setLevelMines(@RequestParam(value = "level", required = false) String level, Model model) {	
+	public String setLevelMines(@RequestParam(value = "level", required = false) String level, Model model) {
 		super.level = Integer.parseInt(level);
 		field = new Field(super.level);
-		fillModel(model);		
+		fillModel(model);
 		return "game";
 	}
 
@@ -58,19 +58,22 @@ public class MinesController extends GeneralController {
 				message = "FAILED";
 			} else if (field.getState() == GameState.SOLVED) {
 				message = "SOLVED";
-				addScore();
+				if (userController.isLogged())
+					addScore();
 			}
 		} catch (NumberFormatException e) {
 			createField();
 		}
 	}
-	
-	private void addScore() {
-		int score = (int)((field.getFinishTime()/1000)*1/level);
+
+	@Override
+	protected void addScore() {
+		int score = (int) ((field.getFinishTime() / 1000) * 1 / level);
 		scoreService.addScore(new Score(userController.getLoggedPlayer().getLogin(), getGameName(), score));
-		
+
 	}
 
+	@Override
 	public String render() {
 		StringBuilder sb = new StringBuilder();
 
@@ -133,6 +136,5 @@ public class MinesController extends GeneralController {
 	protected String getGameName() {
 		return "mines";
 	}
-	
-	
+
 }

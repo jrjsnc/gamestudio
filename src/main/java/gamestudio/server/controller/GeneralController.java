@@ -55,12 +55,13 @@ public abstract class GeneralController {
 	public String getMessage() {
 		return message;
 	}
-	
 		
 	
 	protected abstract String getGameName();
 	
-	protected abstract String render();	
+	protected abstract String render();
+	
+	protected abstract void addScore();
 	}
 
 

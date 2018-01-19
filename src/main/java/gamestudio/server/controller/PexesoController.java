@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.WebApplicationContext;
 
+import gamestudio.entity.Score;
 import gamestudio.game.pexeso.Field;
 import gamestudio.game.pexeso.GameState;
 import gamestudio.game.pexeso.Tile;
@@ -25,17 +26,29 @@ public class PexesoController extends GeneralController {
 		return "game";
 	}
 
+	@RequestMapping("/setLevelpexeso")
+	public String setLevelPexeso(@RequestParam(value = "level", required = false) String level, Model model) {
+		super.level = Integer.parseInt(level);
+		field = new Field(super.level);
+		fillModel(model);
+		return "game";
+	}
+
 	private void processCommand(String row, String column) {
 		try {
 			field.move(Integer.parseInt(row), Integer.parseInt(column));
 			if (field.getState() == GameState.SOLVED) {
+				if (userController.isLogged())
+					addScore();
 				message = "SOLVED";
+
 			}
 		} catch (NumberFormatException e) {
 			createField();
 		}
 	}
 
+	@Override
 	public String render() {
 		StringBuilder sb = new StringBuilder();
 
@@ -68,22 +81,22 @@ public class PexesoController extends GeneralController {
 
 		return sb.toString();
 	}
-	
-	@RequestMapping("/setLevelpexeso")
-	public String setLevelv(@RequestParam(value = "level", required = false) String level, Model model) {	
-		super.level = Integer.parseInt(level);		
-		field = new Field(super.level);
-		fillModel(model);		
-		return "game";
-	}
 
 	private void createField() {
-		field = new Field(level+1);
+		level = 1;
+		field = new Field(level);
 		message = "";
 	}
 
 	@Override
 	protected String getGameName() {
 		return "pexeso";
+	}
+
+	@Override
+	protected void addScore() {
+		int score = (int) ((field.getFinishTime() / 1000) * 1 / level);
+		scoreService.addScore(new Score(userController.getLoggedPlayer().getLogin(), getGameName(), score));
+
 	}
 }

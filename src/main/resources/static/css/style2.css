@@ -85,7 +85,7 @@ p {
     padding: 2em 1em 1em;
 }
 
-#section-b ul {
+ul {
     list-style: none;
     margin: 0;
     padding: 0;
@@ -167,4 +167,75 @@ p {
     #section-b li {
         width: 31%;
     }
+}
+
+/* _______________________________ */
+
+.mines_field{
+	border-collapse: collapse;	
+	margin-left:auto; 
+    margin-right:auto;
+}
+
+.puzzle_field, .pexeso_field{
+	margin-left:auto; 
+    margin-right:auto;
+}
+
+.mines_field td {
+	padding: 0;
+}
+
+.pexeso_field img{ 
+	padding: 0;
+	width: 3em;
+	height: 3em;
+		
+}
+
+.puzzle_tile {
+	border-collapse: collapse;
+	table-layout: fixed;
+	text-align: center;
+	border: 3px solid darkblue;
+	font-size: 3em;
+	width: 1em;
+}
+
+.puzzle_tile a:link {
+	color: darkblue;
+	text-decoration: none;
+}
+
+.puzzle_tile a:visited {
+	color: darkblue;
+	text-decoration: none;
+}
+
+
+
+.comments, .score{
+	width: 100%;
+	border: 1px solid;	
+}
+.comments th, .score th{
+	border: 1px solid;	
+}
+
+.rating a:link {
+	color: darkblue;
+	text-decoration: none;
+}
+
+.rating a:visited {
+	color: darkblue;
+	text-decoration: none;
+}
+
+.rating a:hover {
+	color: red;
+	}
+
+h4{
+	color: red						
 }
