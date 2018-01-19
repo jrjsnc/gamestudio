@@ -25,7 +25,7 @@ public class GuessController extends GeneralController {
 	@RequestMapping("/setLevelguess")
 	public String setLevelGuess(@RequestParam(value = "level", required = false) String level, Model model) {	
 		super.level = Integer.parseInt(level);
-		message = "guess the number from 0 to "+ super.level * 11;
+		message = "guess the number from 0 to "+ super.level * 10;
 		logic = new Logic(super.level * 11);		
 		fillModel(model);		
 		return "game";
