@@ -24,7 +24,7 @@
 				<a href="/logout">Logout</a>
 			</div>
 			<div th:if='${not @userController.logged}'>
-				<a href="/login">Log in</a>
+				<a href="/login">Log in or register</a>
 			</div>
 		</footer>
 	</div>
@@ -36,10 +36,10 @@
 		<!-- 	onsubmit="return validateCommentForm()" -->
 
 		<table class="comments">
-		<tr><th>Date</th><th>User</th><th>Content</th></tr>
+		<tr><th>User</th><th>Content</th></tr>
 			<tr th:each='comment : ${comments}'>
-				<td
-					th:text="${#calendars.format(comment.createdOn,'dd MMMM yyyy HH:mm')}" />
+<!-- 				<td -->
+<!-- 					th:text="${#calendars.format(comment.createdOn,'dd MMMM yyyy HH:mm')}" /> -->
 				<td th:text='${comment.username}' />
 				<td th:text='${comment.content}' />
 			</tr>
